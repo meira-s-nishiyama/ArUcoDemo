@@ -32,7 +32,6 @@ async function Window_onLoad()
     }
     // -------------------------------------------------------------------
 
-/*
     // -- デバイス選択は、https下での可能 --------------------------------
     navigator.mediaDevices.getUserMedia({video: true})
 
@@ -45,7 +44,7 @@ async function Window_onLoad()
 
     cameraOptions.innerHTML = lst_options.join('');
     // -------------------------------------------------------------------
-*/
+
     // -- カメラ使用 -----------------------------------------------------
     navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
     .then(function(stream)
