@@ -53,10 +53,10 @@ async function Window_onLoad()
         const capabilities = track.getCapabilities();
 
         if (undefined === capabilities.zoom) {
-            alert("ズームが使用できません。スマホにてテストして下さい。");
+            alert("このデバイスでは、ズームを使用することはできません。");
         } else {
     //        alert(capabilities.zoom.min + ", " + capabilities.zoom.max + ", " + capabilities.zoom.step);
-//            track.applyConstraints({ advanced: [{ zoom: capabilities.zoom.max }]});
+            track.applyConstraints({ advanced: [{ zoom: capabilities.zoom.max }]});
         }
 
         video_camera.srcObject = stream;
