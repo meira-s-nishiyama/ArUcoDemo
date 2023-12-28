@@ -1,0 +1,182 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>ArUcoデモ</title>
+<!--
+        <link rel="stylesheet" href="../lib/StdStyle.css">
+        <link rel="stylesheet" href="style.css">
+-->
+        <!-- ------------------------------------------------------------- -->
+        <!-- スクリプトインポート                                          -->
+        <!-- ------------------------------------------------------------- -->
+        <script defer src="./lib/cv.js"></script>
+        <script defer src="./lib/aruco.js"></script>
+        <!-- ------------------------------------------------------------- -->
+
+        <script defer>
+window.addEventListener("load", Window_onLoad);
+var detector;
+
+async function Window_onLoad()
+{
+    const video_camera  = document.querySelector("#video_camera");
+    const cameraOptions = document.querySelector(".video-options > select");
+
+    // -- WebRTCを使用できるか確認 ---------------------------------------
+    if ("mediaDevices" in navigator && "getUserMedia" in navigator.mediaDevices) {
+        console.log("Let's get this party started");
+    } else {
+        console.log("メディアが使用できません。");
+        return false;
+    }
+    // -------------------------------------------------------------------
+
+/*
+    // -- デバイス選択は、https下での可能 --------------------------------
+    navigator.mediaDevices.getUserMedia({video: true})
+
+    const lst_devices      = await navigator.mediaDevices.enumerateDevices();
+    const lst_videoDevices = lst_devices.filter(device => device.kind === "videoinput");
+    const lst_options      = lst_videoDevices.map(videoDevice =>
+    {
+        return `<option value="${videoDevice.deviceId}">${videoDevice.label}</option>`;
+    });
+
+    cameraOptions.innerHTML = lst_options.join('');
+    // -------------------------------------------------------------------
+*/
+    // -- カメラ使用 -----------------------------------------------------
+    navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
+    .then(function(stream)
+    {
+        const [track]      = stream.getVideoTracks();
+        const capabilities = track.getCapabilities();
+
+        if (undefined === capabilities.zoom) {
+            alert("ズームが使用できません。スマホにてテストして下さい。");
+        } else {
+    //        alert(capabilities.zoom.min + ", " + capabilities.zoom.max + ", " + capabilities.zoom.step);
+//            track.applyConstraints({ advanced: [{ zoom: capabilities.zoom.max }]});
+        }
+
+        video_camera.srcObject = stream;
+        video_camera.setAttribute("playsinline", true); // required to tell iOS safari we don't want fullscreen
+        video_camera.play();
+
+//        const detector = new AR.Detector({
+        detector = new AR.Detector({
+//            dictionaryName: "ARUCO_6X6_1000"
+            dictionaryName: "ARUCO"
+        });
+
+        requestAnimationFrame(tick);
+    });
+    // -------------------------------------------------------------------
+}
+
+function tick()
+{
+    requestAnimationFrame(tick);
+
+    const video_camera  = document.querySelector("#video_camera");
+
+    if (video_camera.readyState === video_camera.HAVE_ENOUGH_DATA) {
+        snapshot();
+
+        var markers = detector.detect(imageData);
+        drawCorners(markers);
+        drawId(markers);
+    }
+}
+
+function snapshot()
+{
+    const video_camera  = document.querySelector("#video_camera");
+    const canvas_camera = document.getElementById("canvas_camera");
+    context = canvas_camera.getContext("2d");
+
+    canvas_camera.height = video_camera.videoHeight;
+    canvas_camera.width  = video_camera.videoWidth;
+
+    context.drawImage(video_camera, 0, 0, canvas_camera.width, canvas_camera.height);
+    imageData = context.getImageData(0, 0, canvas_camera.width, canvas_camera.height);
+}
+
+function drawCorners(markers)
+{
+      var corners, corner, i, j;
+    
+      context.lineWidth = 3;
+
+      for (i = 0; i !== markers.length; ++ i){
+        corners = markers[i].corners;
+        
+        context.strokeStyle = "red";
+        context.beginPath();
+        
+        for (j = 0; j !== corners.length; ++ j){
+          corner = corners[j];
+          context.moveTo(corner.x, corner.y);
+          corner = corners[(j + 1) % corners.length];
+          context.lineTo(corner.x, corner.y);
+        }
+
+        context.stroke();
+        context.closePath();
+        
+        context.strokeStyle = "green";
+        context.strokeRect(corners[0].x - 2, corners[0].y - 2, 4, 4);
+      }
+}
+
+function drawId(markers)
+{
+      var corners, corner, x, y, i, j;
+      
+      context.strokeStyle = "blue";
+      context.lineWidth = 1;
+      
+      for (i = 0; i !== markers.length; ++ i){
+        corners = markers[i].corners;
+        
+        x = Infinity;
+        y = Infinity;
+        
+        for (j = 0; j !== corners.length; ++ j){
+          corner = corners[j];
+          
+          x = Math.min(x, corner.x);
+          y = Math.min(y, corner.y);
+        }
+
+        context.font = "50px sans-serif";
+        context.strokeText(markers[i].id, x, y)
+      }
+}
+        </script>
+
+    </head>
+
+    <body>
+        <header>ArUcoデモ</header>
+        <video id="video_camera" autoplay style="display:none;"></video>
+<!--
+        <video id="video_camera" autoplay></video>
+-->
+
+        <canvas id="canvas_camera" style="max-width: 640px;"></canvas>
+
+<!--
+        <div class="video-options">
+            <select name="" id="" class="custom-select">
+                <option value="">Select camera</option>
+            </select>
+        </div>
+-->
+    </body>
+
+    <footer>
+    </footer>
+
+</html>
