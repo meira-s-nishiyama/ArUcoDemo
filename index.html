@@ -47,7 +47,7 @@ async function Window_onLoad()
 
     // -- カメラ使用 -----------------------------------------------------
 //    navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
-navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment", width: 1944, height: 2592 } })
+navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment", width: 2592, height: 1944 } })
     .then(function(stream)
     {
         const [track]      = stream.getVideoTracks();
@@ -58,7 +58,7 @@ navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment", width:
         } else {
     //        alert(capabilities.zoom.min + ", " + capabilities.zoom.max + ", " + capabilities.zoom.step);
     //        track.applyConstraints({ advanced: [{ zoom: capabilities.zoom.max }]});
-            track.applyConstraints({ advanced: [{ zoom: 2 }]});
+            track.applyConstraints({ advanced: [{ zoom: 1 }]});
         }
 
         video_camera.srcObject = stream;
