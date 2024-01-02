@@ -66,7 +66,9 @@ async function Window_onLoad()
 //        const detector = new AR.Detector({
         detector = new AR.Detector({
 //            dictionaryName: "ARUCO_6X6_1000"
-            dictionaryName: "ARUCO"
+//            dictionaryName: "ARUCO"
+            dictionaryName: 'ARUCO_MIP_36h12',
+            maxHammingDistance: 5
         });
 
         requestAnimationFrame(tick);
