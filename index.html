@@ -46,7 +46,8 @@ async function Window_onLoad()
     // -------------------------------------------------------------------
 
     // -- カメラ使用 -----------------------------------------------------
-    navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
+//    navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
+navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment", width: 1944, height: 2592 } })
     .then(function(stream)
     {
         const [track]      = stream.getVideoTracks();
