@@ -56,7 +56,8 @@ async function Window_onLoad()
             alert("このデバイスでは、ズームを使用することはできません。");
         } else {
     //        alert(capabilities.zoom.min + ", " + capabilities.zoom.max + ", " + capabilities.zoom.step);
-            track.applyConstraints({ advanced: [{ zoom: capabilities.zoom.max }]});
+    //        track.applyConstraints({ advanced: [{ zoom: capabilities.zoom.max }]});
+            track.applyConstraints({ advanced: [{ zoom: 2 }]});
         }
 
         video_camera.srcObject = stream;
