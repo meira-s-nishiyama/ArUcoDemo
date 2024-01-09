@@ -56,7 +56,7 @@ function VideoDevice_select(id_device)
     // -- カメラ使用 -----------------------------------------------------
 //    navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
 // navigator.mediaDevices.getUserMedia({ video: { deviceId: id_device, facingMode: "environment", width: 2592, height: 1944 } })
-    navigator.mediaDevices.getUserMedia({ video: { deviceId: id_device, width: 2592, height: 1944 } })
+    navigator.mediaDevices.getUserMedia({ video: { deviceId: id_device } })
     .then(function(stream)
     {
         const [track]      = stream.getVideoTracks();
