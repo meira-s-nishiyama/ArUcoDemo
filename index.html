@@ -170,10 +170,6 @@ function drawId(markers)
 
     var corners, corner, x, y, i, j;
       
-    // context.strokeStyle = "blue";
-    context.fillStyle = "blue";
-    context.lineWidth = 1;
-
     for (i = 0; i !== markers.length; ++ i){
         corners = markers[i].corners;
         
@@ -187,14 +183,22 @@ function drawId(markers)
             y = Math.min(y, corner.y);
         }
 
+        // context.strokeStyle = "blue";
+        context.fillStyle = "blue";
+        context.lineWidth = 1;
         context.font = "50px sans-serif";
-        // context.strokeText(markers[i].id, x, y)
-        const str_entity = Entity_get(markers[i].id);
-        context.fillText(str_entity, x, y)
 
-        if (id_search === markers[i].id) {
-            document.getElementById("auido_warning").play();
-            window.navigator.vibrate([500]);
+        if (-1 === id_search) {
+            // context.strokeText(markers[i].id, x, y)
+            const str_entity = Entity_get(markers[i].id);
+            context.fillText(str_entity, x, y)
+        } else {
+            if (id_search === markers[i].id) {
+                const str_entity = Entity_get(markers[i].id);
+                context.fillText(str_entity, x, y)
+                document.getElementById("auido_warning").play();
+                window.navigator.vibrate([500]);
+            }
         }
     }
 }
@@ -234,6 +238,7 @@ function Id_get(str_entity)
             </select>
         </div>
 
+        <label for="indput_search>尋ね人</label>
         <input id="input_search" type="text"></input>
 
         <audio id="auido_warning">
