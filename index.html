@@ -83,6 +83,9 @@ function VideoDevice_select(id_device)
         });
 
         requestAnimationFrame(tick);
+    }).catch(function(e)
+    {
+        alert(e.message);
     });
     // -------------------------------------------------------------------
 }
