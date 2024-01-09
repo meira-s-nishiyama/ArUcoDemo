@@ -82,7 +82,7 @@ async function VideoDevice_select(id_device)
         } else {
     //        alert(capabilities.zoom.min + ", " + capabilities.zoom.max + ", " + capabilities.zoom.step);
     //        track.applyConstraints({ advanced: [{ zoom: capabilities.zoom.max }]});
-            track.applyConstraints({ advanced: [{ zoom: 1 }]});
+            track.applyConstraints({ advanced: [{ zoom: 2 }]});
         }
 
         video_camera.srcObject = stream;
