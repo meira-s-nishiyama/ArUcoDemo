@@ -20,7 +20,6 @@ var detector;
 
 async function Window_onLoad()
 {
-    const video_camera  = document.querySelector("#video_camera");
     const cameraOptions = document.querySelector(".video-options > select");
 
     // -- WebRTCを使用できるか確認 ---------------------------------------
@@ -44,10 +43,15 @@ async function Window_onLoad()
 
     cameraOptions.innerHTML = lst_options.join('');
     // -------------------------------------------------------------------
+}
+
+function VideoDevice_select(id_device)
+{
+    const video_camera  = document.querySelector("#video_camera");
 
     // -- カメラ使用 -----------------------------------------------------
 //    navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
-navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment", width: 2592, height: 1944 } })
+navigator.mediaDevices.getUserMedia({ video: { deviceId: id_device, facingMode: "environment", width: 2592, height: 1944 } })
     .then(function(stream)
     {
         const [track]      = stream.getVideoTracks();
