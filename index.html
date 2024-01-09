@@ -171,8 +171,26 @@ function drawId(markers)
 
         context.font = "50px sans-serif";
         // context.strokeText(markers[i].id, x, y)
-        context.fillText(markers[i].id, x, y)
+        const str_entity = Entity_get(markers[i].id);
+        context.fillText(str_entity, x, y)
       }
+}
+
+function Entity_get(id)
+{
+    const lst_entity = {
+        0: "堀水",
+        1: "大橋（誉）",
+        2: "塚原",
+        3: "井戸",
+        4: "鷲見",
+        5: "丹羽",
+        6: "池戸",
+        7: "黒田",
+        8: "西山"
+    };
+
+    return lst_entity[id];
 }
         </script>
 
