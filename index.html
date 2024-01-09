@@ -59,6 +59,8 @@ function VideoDevice_select(id_device)
     navigator.mediaDevices.getUserMedia({ video: { deviceId: id_device } })
     .then(function(stream)
     {
+        stream.getTracks().forEach(track => track.stop());
+
         const [track]      = stream.getVideoTracks();
         const capabilities = track.getCapabilities();
 
