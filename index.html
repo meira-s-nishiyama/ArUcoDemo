@@ -42,6 +42,10 @@ async function Window_onLoad()
     });
 
     cameraOptions.innerHTML = lst_options.join('');
+    cameraOptions.addEventListener("change", function()
+    {
+        VideoDevice_select(this.selectedIndex);
+    });
     // -------------------------------------------------------------------
 }
 
