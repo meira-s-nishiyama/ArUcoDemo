@@ -18,6 +18,18 @@
 window.addEventListener("load", Window_onLoad);
 var detector;
 
+const lst_entity = {
+    0: "堀水",
+    1: "大橋（誉）",
+    2: "塚原",
+    3: "井戸",
+    4: "鷲見",
+    5: "丹羽",
+    6: "池戸",
+    7: "黒田",
+    8: "西山"
+};
+
 async function Window_onLoad()
 {
     const cameraOptions = document.querySelector(".video-options > select");
@@ -180,21 +192,21 @@ function drawId(markers)
 
 function Entity_get(id)
 {
-    const lst_entity = {
-        0: "堀水",
-        1: "大橋（誉）",
-        2: "塚原",
-        3: "井戸",
-        4: "鷲見",
-        5: "丹羽",
-        6: "池戸",
-        7: "黒田",
-        8: "西山"
-    };
-
     return lst_entity[id];
 }
-        </script>
+
+function Id_get(str_entity)
+{
+    for (let i = 0; i < len(lst_entity); i++) {
+        if (str_entity === lst_entity[i]) {
+            return i;
+        }
+    }
+
+    return -1;
+}
+    
+    </script>
 
     </head>
 
