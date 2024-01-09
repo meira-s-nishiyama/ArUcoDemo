@@ -100,7 +100,7 @@ function tick()
     const video_camera  = document.querySelector("#video_camera");
 
     if (video_camera.readyState === video_camera.HAVE_ENOUGH_DATA) {
-        snapshot();
+        const imageData = snapshot();
 
         var markers = detector.detect(imageData);
         drawCorners(markers);
@@ -119,6 +119,8 @@ function snapshot()
 
     context.drawImage(video_camera, 0, 0, canvas_camera.width, canvas_camera.height);
     imageData = context.getImageData(0, 0, canvas_camera.width, canvas_camera.height);
+
+    return imageData;
 }
 
 function drawCorners(markers)
