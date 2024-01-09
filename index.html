@@ -169,7 +169,8 @@ function drawId(markers)
         }
 
         context.font = "50px sans-serif";
-        context.strokeText(markers[i].id, x, y)
+        // context.strokeText(markers[i].id, x, y)
+        context.fillText(markers[i].id, x, y)
       }
 }
         </script>
