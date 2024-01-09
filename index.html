@@ -44,18 +44,21 @@ async function Window_onLoad()
     cameraOptions.innerHTML = lst_options.join('');
     cameraOptions.addEventListener("change", function()
     {
-        VideoDevice_select(this[this.selectedIndex].value);
+        await VideoDevice_select(this[this.selectedIndex].value);
     });
     // -------------------------------------------------------------------
 }
 
-function VideoDevice_select(id_device)
+async function VideoDevice_select(id_device)
 {
     const video_camera  = document.querySelector("#video_camera");
 
     // -- カメラ使用 -----------------------------------------------------
 //    navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
 // navigator.mediaDevices.getUserMedia({ video: { deviceId: id_device, facingMode: "environment", width: 2592, height: 1944 } })
+    let stream = await navigator.mediaDevices.getUserMedia({ video: { deviceId: id_device } });
+    stream.getTracks().forEach(track => track.stop());
+
     navigator.mediaDevices.getUserMedia({ video: { deviceId: id_device } })
     .then(function(stream)
     {
