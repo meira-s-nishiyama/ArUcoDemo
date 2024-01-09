@@ -164,13 +164,17 @@ function drawCorners(markers)
 
 function drawId(markers)
 {
-      var corners, corner, x, y, i, j;
+    const input_search = document.getElementById("input_search");
+    const str_search = input_search.value;
+    const id_search = Id_get(str_search);
+console.log(id_search);
+    var corners, corner, x, y, i, j;
       
-      // context.strokeStyle = "blue";
-      context.fillStyle = "blue";
-      context.lineWidth = 1;
-      
-      for (i = 0; i !== markers.length; ++ i){
+    // context.strokeStyle = "blue";
+    context.fillStyle = "blue";
+    context.lineWidth = 1;
+
+    for (i = 0; i !== markers.length; ++ i){
         corners = markers[i].corners;
         
         x = Infinity;
@@ -224,6 +228,8 @@ function Id_get(str_entity)
                 <option value="">Select camera</option>
             </select>
         </div>
+
+        <input id="input_search" type="text"></input>
     </body>
 
     <footer>
