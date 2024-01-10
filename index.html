@@ -47,6 +47,8 @@ async function Window_onLoad()
     // -- 探索対象セレクトボックス -----------------------------------------
     let lst_optionsSearch = [];
     
+    lst_optionsSearch.push(`<option value="-1"></option>`);
+    
     for (ky in lst_entity) {
         lst_optionsSearch.push(`<option value="${ky}">${lst_entity[ky]}</option>`);
     };
@@ -213,12 +215,12 @@ function drawId(markers)
         context.lineWidth = 1;
         context.font = "50px sans-serif";
 
-        if (-1 === id_search) {
+        if (-1 == id_search) {
             // context.strokeText(markers[i].id, x, y)
             const str_entity = Entity_get(markers[i].id);
             context.fillText(str_entity, x, y)
         } else {
-            if (id_search === markers[i].id) {
+            if (id_search == markers[i].id) {
                 const str_entity = Entity_get(markers[i].id);
                 context.fillText(str_entity, x, y)
                 document.getElementById("auido_warning").play();
