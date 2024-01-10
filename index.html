@@ -33,6 +33,25 @@ const lst_entity = {
 async function Window_onLoad()
 {
     const cameraOptions = document.querySelector(".video-options > select");
+    const select_search = document.querySelector("#select_search");
+
+    // -- 起動ロック ------------------------------------------------------
+    try {
+        const wakeLock = await navigator.wakeLock.request("screen");
+    } catch (err) {
+        // 起動ロックの要求に失敗 - 通常は、バッテリー低下などシステムに起因する。
+        console.log(`${err.name}, ${err.message}`);
+    }
+    // -------------------------------------------------------------------
+
+    // -- 探索対象セレクトボックス -----------------------------------------
+    const lst_optionsSearch = lst_entity.map((vl, ky) =>
+    {
+        return `<option value="${ky}">${vl}</option>`;
+    });
+
+    select_search.innerHTML = lst_optionsSearch.join('');
+    // -------------------------------------------------------------------
 
     // -- WebRTCを使用できるか確認 ---------------------------------------
     if ("mediaDevices" in navigator && "getUserMedia" in navigator.mediaDevices) {
@@ -164,9 +183,14 @@ function drawCorners(markers)
 
 function drawId(markers)
 {
+/*
     const input_search = document.getElementById("input_search");
     const str_search = input_search.value;
     const id_search = Id_get(str_search);
+*/
+
+    const select_search = document.getElementById("select_search");
+    const id_search = select_search.value;
 
     var corners, corner, x, y, i, j;
       
@@ -239,7 +263,10 @@ function Id_get(str_entity)
         </div>
 
         <label for="indput_search">尋ね人</label>
-        <input id="input_search" type="text"></input>
+//        <input id="input_search" type="text"></input>
+        <select id="select_search">
+            <option value="">Select Target</option>
+        </select>
 
         <audio id="auido_warning">
             <source src="./resources/警告音1.mp3" type="audio/mp3">
