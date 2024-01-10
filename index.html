@@ -49,7 +49,7 @@ async function Window_onLoad()
     
     for (ky in lst_entity) {
         lst_optionsSearch.push(`<option value="${ky}">${lst_entity[ky]}</option>`);
-    });
+    };
 
     select_search.innerHTML = lst_optionsSearch.join('');
     // -------------------------------------------------------------------
@@ -264,7 +264,9 @@ function Id_get(str_entity)
         </div>
 
         <label for="indput_search">尋ね人</label>
-//        <input id="input_search" type="text"></input>
+<!--
+        <input id="input_search" type="text"></input>
+-->
         <select id="select_search">
             <option value="">Select Target</option>
         </select>
