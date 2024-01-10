@@ -45,9 +45,10 @@ async function Window_onLoad()
     // -------------------------------------------------------------------
 
     // -- 探索対象セレクトボックス -----------------------------------------
-    const lst_optionsSearch = lst_entity.map((vl, ky) =>
-    {
-        return `<option value="${ky}">${vl}</option>`;
+    let lst_optionsSearch = [];
+    
+    for (ky in lst_entity) {
+        lst_optionsSearch.push(`<option value="${ky}">${lst_entity[ky]}</option>`);
     });
 
     select_search.innerHTML = lst_optionsSearch.join('');
