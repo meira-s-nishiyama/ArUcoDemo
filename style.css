@@ -11,11 +11,16 @@ header {
     box-sizing: border-box;
     padding-left: 5px;
     font-size: 2.0em;
+    padding-left: 5em;
 }
 
 .PageTitle {
+    padding-left: 5em;
     vertical-align: middle;
+    height: 25px;
+    font-size: 14px;
     background-color: #EAE8E1;
+    color: #000000;
 }
 
 .InputLabel {
