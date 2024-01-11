@@ -253,12 +253,6 @@ function Id_get(str_entity)
 
     <body>
         <header>ArUcoデモ</header>
-        <video id="video_camera" autoplay style="display:none;"></video>
-<!--
-        <video id="video_camera" autoplay></video>
--->
-
-        <canvas id="canvas_camera" style="max-width: 640px;"></canvas>
 
         <div class="video-options">
             <label for="select_camera" class="InputLabel">カメラ</label>
@@ -267,6 +261,13 @@ function Id_get(str_entity)
             </select>
             <button id="button_startCamera" type="button">▷</button>
         </div>
+
+        <video id="video_camera" autoplay style="display:none;"></video>
+<!--
+        <video id="video_camera" autoplay></video>
+-->
+
+        <canvas id="canvas_camera" style="max-width: 640px;"></canvas>
 
         <label for="indput_search" class="InputLabel">尋ね人</label>
 <!--
