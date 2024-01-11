@@ -1,0 +1,8 @@
+@charset "utf-8";
+
+.InputLabel {
+    background: #afeeee;
+    border-right: 5px solid #456689;
+    padding: 2px 5px;
+    text-align:left;
+}
