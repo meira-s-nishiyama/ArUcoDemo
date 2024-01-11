@@ -262,20 +262,17 @@ function Id_get(str_entity)
             <button id="button_startCamera" type="button">▷</button>
         </div>
 
-        <video id="video_camera" autoplay style="display:none;"></video>
-<!--
-        <video id="video_camera" autoplay></video>
--->
+        <div>
+            <video id="video_camera" autoplay style="display:none;"></video>
+            <canvas id="canvas_camera" style="max-width: 640px;"></canvas>
+        </div>
 
-        <canvas id="canvas_camera" style="max-width: 640px;"></canvas>
-
-        <label for="indput_search" class="InputLabel">尋ね人</label>
-<!--
-        <input id="input_search" type="text"></input>
--->
-        <select id="select_search">
-            <option value="">Select Target</option>
-        </select>
+        <div>
+            <label for="indput_search" class="InputLabel">尋ね人</label>
+            <select id="select_search">
+                <option value="">Select Target</option>
+            </select>
+        </div>
 
         <audio id="auido_warning">
             <source src="./resources/警告音1.mp3" type="audio/mp3">
