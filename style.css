@@ -14,15 +14,6 @@ header {
     padding-left: 5em;
 }
 
-.PageTitle {
-    padding-left: 5em;
-    vertical-align: middle;
-    height: 25px;
-    font-size: 14px;
-    background-color: #EAE8E1;
-    color: #000000;
-}
-
 .InputLabel {
     background: #afeeee;
     border-right: 5px solid #456689;
